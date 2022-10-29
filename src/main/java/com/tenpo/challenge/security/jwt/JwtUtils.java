@@ -19,9 +19,6 @@ public class JwtUtils {
     @Value("${tenpo.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    /*@Value("${tenpo.app.jwtCookieName}")
-    private String jwtCookie;*/
-
     public String generateJwtToken(UserDetailsImpl userPrincipal) {
         return generateTokenFromUsername(userPrincipal.getUsername());
     }

@@ -1,6 +1,8 @@
 package com.tenpo.challenge.security.service;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.tenpo.challenge.payload.response.CalculatorServiceResponse;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,48 +14,39 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Random;
+import java.util.Optional;
 
 @Service
 @Slf4j
-public class ExternalService {
+public class CalculatorService {
 
     private static final HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
-    private static final String URL_EXTERNAL_SERVICE = "http://mock-url";
+    private static final String URL_EXTERNAL_SERVICE = "http://localhost:8089/calculator/percentage";
 
-    @CircuitBreaker(name = "externalservice", fallbackMethod = "fallback")
+    @CircuitBreaker(name = "calculatorservice", fallbackMethod = "fallback")
     public Double getExternalService(int firstValue, int secondValue) {
         try {
-            /*
-            final WeatherResponse response = new Gson().fromJson(callExternalServiceAPI(), WeatherResponse.class);
+            final CalculatorServiceResponse response = new Gson().fromJson(callExternalServiceAPI(firstValue, secondValue), CalculatorServiceResponse.class);
 
             return Optional.ofNullable(response)
-                    .orElse(new WeatherResponse())
-                    .getData()
-                    .stream()
-                    .findFirst()
-                    .map(WeatherItem::getTemp)
-                    .orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST, "There is no data available"));
-             */
-            Double addValues = Double.valueOf(firstValue + secondValue);
-
-            return addValues + calculatePercentage(addValues, randomNumber());
+                    .orElse(new CalculatorServiceResponse())
+                    .getPercentage();
         } catch (JsonSyntaxException e) {
             log.info("Unable to parse response");
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to parse response");
         }
     }
 
-    private String callExternalServiceAPI() {
-        final HttpRequest request = HttpRequest.newBuilder(URI.create(URL_EXTERNAL_SERVICE))
+    private String callExternalServiceAPI(int firstValue, int secondValue) {
+        final HttpRequest request = HttpRequest.newBuilder(URI.create(URL_EXTERNAL_SERVICE + "/" + firstValue + "/" + secondValue))
                 .GET()
                 .build();
         final HttpResponse<String> response;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
-            log.info("ExternalService out of Service");
-            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "ExternalService out of Service");
+            log.info("CalculatorService out of Service");
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "CalculatorService out of Service");
         }
 
         return response.body();
@@ -64,12 +57,4 @@ public class ExternalService {
         return 200d;
     }
 
-    private int randomNumber() {
-        Random randI = new Random();
-        return randI.nextInt(100) + 1;
-    }
-
-    private double calculatePercentage(double obtained, double total) {
-        return obtained * 100 / total;
-    }
 }
