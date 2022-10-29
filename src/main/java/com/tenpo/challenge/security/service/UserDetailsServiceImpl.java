@@ -1,4 +1,4 @@
-package com.tenpo.challenge.security.services;
+package com.tenpo.challenge.security.service;
 
 import com.tenpo.challenge.model.User;
 import com.tenpo.challenge.repository.UserRepository;

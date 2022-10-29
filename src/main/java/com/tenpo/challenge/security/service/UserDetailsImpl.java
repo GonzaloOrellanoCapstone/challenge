@@ -1,4 +1,4 @@
-package com.tenpo.challenge.security.services;
+package com.tenpo.challenge.security.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tenpo.challenge.model.User;

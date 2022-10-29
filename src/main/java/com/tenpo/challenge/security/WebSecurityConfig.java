@@ -2,7 +2,7 @@ package com.tenpo.challenge.security;
 
 import com.tenpo.challenge.security.jwt.AuthEntryPointJwt;
 import com.tenpo.challenge.security.jwt.AuthTokenFilter;
-import com.tenpo.challenge.security.services.UserDetailsServiceImpl;
+import com.tenpo.challenge.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -60,6 +60,8 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeRequests().antMatchers("/swagger-ui", "/swagger-ui/index.html", "/configuration/**", "/swagger*/**", "/webjars/**", "/api-docs").permitAll()
+                .antMatchers("/v3/api-docs/**").permitAll();
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
