@@ -6,3 +6,7 @@
 * Lombok
 * JPA
 * Resilience4j
+
+## External Service - CalculatorService
+
+* https://github.com/GonzaloOrellanoCapstone/calculatorService
