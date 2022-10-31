@@ -44,3 +44,7 @@ Debes desarrollar una API REST en Spring Boot utilizando java 11 o superior, con
 * Login JWT architecture:
 
 ![](src/main/resources/diagrams/LoginJwtArchitecture.png)
+
+## Postman
+
+Dentro de la carpeta Resources se encuentra la collection de Postman
