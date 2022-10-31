@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "896d475e-8eb6-4823-8193-29613642f787",
+		"name": "Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21442011"
+	},
+	"item": [
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"gonzalo\",\r\n    \"password\": \"1234567890\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"gonzalo2\",\r\n    \"email\": \"grorellano@gmail.com2\",\r\n    \"password\": \"12345678901\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Access resource successfully with token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb256YWxvIiwiaWF0IjoxNjY2ODI2NzM3LCJleHAiOjE2NjY4MjY3OTd9.10soizemOV3rU_Qc-22n4OQNKC-7r1fmbvMDWxFK94e74e7gMNV9RX7tXPYJNM8cRg98MUefJQSi3psASFdZaQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8088/api/test/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"test",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rrefresh token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb256YWxvIiwiaWF0IjoxNjY2ODI2NzM3LCJleHAiOjE2NjY4MjY3OTd9.10soizemOV3rU_Qc-22n4OQNKC-7r1fmbvMDWxFK94e74e7gMNV9RX7tXPYJNM8cRg98MUefJQSi3psASFdZaQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refreshToken\": \"ac0c5689-cb3a-4e54-b011-e586e5fa539e\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/auth/refreshtoken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"auth",
+						"refreshtoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Access resource failed",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb256YWxvIiwiaWF0IjoxNjY2ODI2NzM3LCJleHAiOjE2NjY4MjY3OTd9.10soizemOV3rU_Qc-22n4OQNKC-7r1fmbvMDWxFK94e74e7gMNV9RX7tXPYJNM8cRg98MUefJQSi3psASFdZaQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8088/api/test/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"test",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send a inexistent refresh token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb256YWxvIiwiaWF0IjoxNjY2ODI2NzM3LCJleHAiOjE2NjY4MjY3OTd9.10soizemOV3rU_Qc-22n4OQNKC7r1fmbvMDWxFK94e74e7gMNV9RX7tXPYJNM8cRg98MUefJQSi3psASFdZaQ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refreshToken\": \"99e42e93-cf49-42c8-a6f0-d20bf2d52cd1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/api/auth/refreshtoken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"auth",
+						"refreshtoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Percentage for CalculatorService",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/calculator/percentage/5/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"calculator",
+						"percentage",
+						"5",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get percentage - challenge",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb256YWxvMiIsImlhdCI6MTY2NzA4NDI0NywiZXhwIjoxNjY3MDg0MzA3fQ.cBmTU0Wi0_XH7-A0bnhUf-lUwx35yfWU8wvoCkpzp4frv5dtLuZAn1-7yQep0Pu1pSfQVTiWjiv_FDFIEsCJeg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8088/api/test/calculator/percentage/5/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"test",
+						"calculator",
+						"percentage",
+						"5",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All logmessage with pagination",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnb256YWxvMiIsImlhdCI6MTY2NzE4NTI0NiwiZXhwIjoxNjY3MTg1MzA2fQ.4uF4yQ5PuphzJb7SH5ailocY9zy6MwzEkuqNAHYxIvJQtImG9rWVZD6pSXryfw38p1SBM9NICmqoiS18bUGa1Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8088/api/log-message/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"log-message",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
