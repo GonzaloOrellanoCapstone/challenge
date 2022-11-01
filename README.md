@@ -54,3 +54,14 @@ Debes desarrollar una API REST en Spring Boot utilizando java 11 o superior, con
 
 - http://localhost:8088/swagger-ui/index.html
 
+## Pre requisitos
+Ejecutar el siguiente comando en la raiz del proyecto para levantar el servicio:
+```bash
+$ docker-compose up
+```
+
+## Comentarios
+- Resilience4j en caso de fallar la API del calculatorService devuelve un valor random.
+- getLogMessage devuelve el historial de las llamadas a los endpoints con paginacion. Por defecto si no se le pasa los valores el page = 0 y pageSize = 20.
+- Se puede integrar Eureka para registrar todas las instacioas de MS que desplegamos.
+- Tambien se puede tener un config-server donde vamos a alojar todas las variables de los MS pero por ambiente. Deberiamos de modificar el application.properties a bootstrap.properties donde debemos de indicar el profile activo.

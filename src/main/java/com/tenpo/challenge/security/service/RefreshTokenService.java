@@ -17,12 +17,14 @@ import java.util.UUID;
 public class RefreshTokenService {
     @Value("${tenpo.app.jwtRefreshExpirationMs}")
     private Long refreshTokenDurationMs;
-
-    @Autowired
     private RefreshTokenRepository refreshTokenRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public RefreshTokenService(RefreshTokenRepository refreshTokenRepository, UserRepository userRepository) {
+        this.refreshTokenRepository = refreshTokenRepository;
+        this.userRepository = userRepository;
+    }
 
     public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);

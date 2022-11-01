@@ -17,7 +17,6 @@ import com.tenpo.challenge.security.jwt.JwtUtils;
 import com.tenpo.challenge.security.service.RefreshTokenService;
 import com.tenpo.challenge.security.service.UserDetailsImpl;
 import com.tenpo.challenge.service.AuthService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,23 +34,24 @@ import java.util.stream.Collectors;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
     private PasswordEncoder encoder;
-
-    @Autowired
     private JwtUtils jwtUtils;
+    private RefreshTokenService refreshTokenService;
 
     @Autowired
-    private RefreshTokenService refreshTokenService;
+    public AuthServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository,
+                           RoleRepository roleRepository, PasswordEncoder encoder,
+                           JwtUtils jwtUtils, RefreshTokenService refreshTokenService) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.encoder = encoder;
+        this.jwtUtils = jwtUtils;
+        this.refreshTokenService = refreshTokenService;
+    }
 
     @Override
     public ResponseEntity<?> authSignin(LoginRequest loginRequest) {
