@@ -30,6 +30,7 @@ Debes desarrollar una API REST en Spring Boot utilizando java 11 o superior, con
 * Docker
 * Controller Advice
 * Spring Security - JWT
+* Swagger
 
 ## External Service - CalculatorService
 
@@ -47,4 +48,9 @@ Debes desarrollar una API REST en Spring Boot utilizando java 11 o superior, con
 
 ## Postman
 
-Dentro de la carpeta Resources se encuentra la collection de Postman
+- Dentro de la carpeta Resources se encuentra la collection de Postman
+
+## Swagger
+
+- http://localhost:8088/swagger-ui/index.html
+
