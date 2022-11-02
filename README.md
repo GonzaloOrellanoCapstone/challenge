@@ -34,7 +34,7 @@ Debes desarrollar una API REST en Spring Boot utilizando java 11 o superior, con
 
 ## External Service - CalculatorService
 
-* https://github.com/GonzaloOrellanoCapstone/calculatorService
+* URL GitHub -> https://github.com/GonzaloOrellanoCapstone/calculatorService
 
 ## Diagrams
 
@@ -61,7 +61,11 @@ $ docker-compose up
 ```
 
 ## Comentarios
-- Resilience4j en caso de fallar la API del calculatorService devuelve un valor random.
+- Resilience4j en caso de fallar la API del calculatorService devuelve un valor fijo en 200d.
 - getLogMessage devuelve el historial de las llamadas a los endpoints con paginacion. Por defecto si no se le pasa los valores el page = 0 y pageSize = 20.
-- Se puede integrar Eureka para registrar todas las instacioas de MS que desplegamos.
+- Se puede integrar Eureka para registrar todas las instancias de MS que desplegamos.
 - Tambien se puede tener un config-server donde vamos a alojar todas las variables de los MS pero por ambiente. Deberiamos de modificar el application.properties a bootstrap.properties donde debemos de indicar el profile activo.
+- Dentro del application.properties se dejo un H2 por si se quiere utilizar, solo basta con ejecutar: 
+```bash
+$ mvn spring-boot:run
+```

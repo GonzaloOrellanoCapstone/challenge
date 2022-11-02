@@ -8,18 +8,19 @@ import com.tenpo.challenge.payload.request.SignupRequest;
 import com.tenpo.challenge.payload.request.TokenRefreshRequest;
 import com.tenpo.challenge.service.AuthService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.junit.runner.RunWith;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = AuthController.class)
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class AuthControllerTest extends AbstractTest {
 
     @MockBean
@@ -52,14 +53,6 @@ public class AuthControllerTest extends AbstractTest {
                         .content(aJsonTokenRefreshRequest(createRefreshTokenRequest())))
                 .andExpect(status().isOk());
     }
-
-    /*@Test
-    public void signoutTest() throws Exception {
-        final ResultActions resultActions = givenController().perform(MockMvcRequestBuilders
-                        .post(URI.concat("/signout"))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }*/
 
     private LoginRequest createLoginRequest() {
         return new LoginRequest("username", "password");
